@@ -3,6 +3,7 @@
 <head>
 {% load staticfiles %}
 {% load category_menu %}
+{% load thumbnail %}
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Foundation | Welcome</title>
@@ -53,30 +54,18 @@
 <hr>
 </div>
 <div class="row small-up-2 large-up-4">
-<div class="column">
-<img class="thumbnail" src="http://placehold.it/300x400">
-<h5>Nulla At Nulla Justo, Eget</h5>
-<p>$400</p>
-<a href="#" class="button expanded">Buy</a>
-</div>
-<div class="column">
-<img class="thumbnail" src="http://placehold.it/300x400">
-<h5>Nulla At Nulla Justo, Eget</h5>
-<p>$400</p>
-<a href="#" class="button expanded">Buy</a>
-</div>
-<div class="column">
-<img class="thumbnail" src="http://placehold.it/300x400">
-<h5>Nulla At Nulla Justo, Eget</h5>
-<p>$400</p>
-<a href="#" class="button expanded">Buy</a>
-</div>
-<div class="column">
-<img class="thumbnail" src="http://placehold.it/300x400">
-<h5>Nulla At Nulla Justo, Eget</h5>
-<p>$400</p>
-<a href="#" class="button expanded">Buy</a>
-</div>
+    {% for item in data.latest %}
+        <div class="column">
+            {{ item.photo }}
+            {% thumbnail item.photo "300x400" crop="center" as im %}
+                qwe
+                <img class="thumbnail" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            {% endthumbnail %}
+            <h5> {{ item.title }} </h5>
+            <p> {{ item.price }} руб. </p>
+            <a href="#" class="button expanded">В корзину</a>
+        </div>
+    {% endfor %}
 </div>
 <hr>
 <div class="row column">

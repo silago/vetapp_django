@@ -2,12 +2,13 @@ from django.db import models
 from autoslug import AutoSlugField
 from pytils.translit import slugify
 from django.conf import settings
+from sorl.thumbnail import ImageField
 
 class Category(models.Model):
     title = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='title')
     parent = models.ForeignKey('Category', null=True, blank=True)
-    photo = models.ImageField(null=True, blank=True)
+    photo = ImageField(null=True, blank=True)
     def save(self):
         self.slug  = slugify(self.title)
         super(Category,self).save()

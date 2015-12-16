@@ -26,7 +26,7 @@ SECRET_KEY = '4z@zt&^vz_u+qjs$5iodut1ce_@z*bc*!$ppwfbavhdq)##tp-'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+DEFAULT_INDEX_TABLESPACE=''
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -120,7 +121,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+#MEDIA_URL = 'file:///home/silago/work/vetapp_pure_django/vetapp/media/'
+
+THUMBNAIL_DEBUG = True
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_table',
+    }
+}
