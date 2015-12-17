@@ -3,6 +3,7 @@
 <head>
 {% load staticfiles %}
 {% load category_menu %}
+{% load basket_info %}
 {% load thumbnail %}
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,6 +21,9 @@
         {% for i in cm %}
         <li><a href="#">{{ i.title }} </a></li>
         {% endfor %}
+        <li>
+            <strong>Items in basket: {% basket_info %}</strong>
+        </li>
 </ul>
 </div>
 <!--
@@ -58,7 +62,6 @@
         <div class="column">
             {{ item.photo }}
             {% thumbnail item.photo "300x400" crop="center" as im %}
-                qwe
                 <img class="thumbnail" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
             {% endthumbnail %}
             <h5> {{ item.title }} </h5>

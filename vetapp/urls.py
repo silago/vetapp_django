@@ -23,8 +23,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^category/(?P<cslug>[\w]+)/$',views.category), 
-    url(r'^category/(?P<cslug>[\w]+)/?P<islug>[\w]+)$',views.product), 
+    url(r'^category/(?P<cslug>[\w]+)/(?P<islug>[\w]+)$',views.product), 
     url(r'^$',views.index), 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 
 

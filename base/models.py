@@ -3,7 +3,23 @@ from autoslug import AutoSlugField
 from pytils.translit import slugify
 from django.conf import settings
 from sorl.thumbnail import ImageField
+from django.contrib.auth.models import User
 
+class BasketProduct(models.Model):
+    user = models.ForeignKey(User)
+    product = models.ForeignKey('Product')
+    quantity= models.IntegerField(default=1)
+
+class Order(models.Model):
+    user = models.ForeignKey(User)
+    creation_ts = models.DateField(auto_now_add = True)
+    phone   = models.TextField()
+    comment = models.TextField()
+
+class OrderProducts(models.Model):
+    product = models.ForeignKey('Product')
+    quantity= models.IntegerField(default=1)
+    
 class Category(models.Model):
     title = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='title')
