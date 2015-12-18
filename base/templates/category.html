@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block content %} 
+<!--
+<div class="row small-up-2 large-up-4">
+-->
+<h4>Top Products</h4>
+{% for item in data.latest %}
+    <div class="media-object">
+        <div class="media-object-section">
+        {% thumbnail item.photo "100x100" crop="center" as im %}
+            <img class="thumbnail" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+        </div>
+        <div class="media-object-section">
+        <h5>{{ item.title }}</h5>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -14,11 +14,14 @@ def index(request):
 
 def category(request,cslug):
     data = []
-    data['category'] = Category.objects.get(cslug=slug)
+    data['category'] = Category.objects.get(slug=cslug)
     data['products'] = Product.objects.filter(category=category_id)
     return render_to_response('category.html',{data:data})
 
 
-def product(request,cslug,islug):
+def product(request,pslug):
+    data = []
+    data['product'] = Product.objects.get(slug=pslug)
+    return render_to_response('product.html',{data:data})
     pass
 # Create your views here.

@@ -1,7 +1,42 @@
-{% extends "base.html" %}
-
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
 {% load staticfiles %}
+{% load category_menu %}
+{% load basket_info %}
 {% load thumbnail %}
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Foundation | Welcome</title>
+<link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+</head>
+<body>
+ 
+<div class="top-bar">
+<div class="top-bar-left">
+<ul class="menu">
+        <li class="menu-text">
+        <img src="{% static 'logo.png' %}" /> Grumpy Cat Shop</li>
+        {% category_menu as cm %}
+        {% for i in cm %}
+        <li><a href="#">{{ i.title }} </a></li>
+        {% endfor %}
+        <li>
+            <strong>Items in basket: {% basket_info %}</strong>
+        </li>
+</ul>
+</div>
+<!--
+<div class="top-bar-right">
+<ul class="menu">
+<li><a href="#">Three</a></li>
+<li><a href="#">Four</a></li>
+<li><a href="#">Five</a></li>
+<li><a href="#">Six</a></li>
+</ul>
+</div>
+-->
+</div>
 {% block content %} 
 <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
 <ul class="orbit-container">
@@ -28,9 +63,8 @@
             {% thumbnail item.photo "300x400" crop="center" as im %}
                 <img class="thumbnail" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
             {% endthumbnail %}
-            <strong><a href="/product/{{item.slug}}"> {{ item.title }} </a> </strong> 
-            <br/>
-            Цена: <strong> {{ item.price }} руб. </strong>
+            <h5> {{ item.title }} </h5>
+            <p> {{ item.price }} руб. </p>
             <a href="#" class="button expanded">В корзину</a>
         </div>
     {% endfor %}
@@ -202,3 +236,10 @@
 </div>
 </div>
 {% endblock %}
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<script>
+      $(document).foundation();
+    </script>
+</body>
+</html>
