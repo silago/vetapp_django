@@ -5,17 +5,35 @@
 <!--
 <div class="row small-up-2 large-up-4">
 -->
-<h4>Top Products</h4>
-{% for item in data.latest %}
-    <div class="media-object">
-        <div class="media-object-section">
-        {% thumbnail item.photo "100x100" crop="center" as im %}
-            <img class="thumbnail" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-        {% endthumbnail %}
-        </div>
-        <div class="media-object-section">
-        <h5>{{ item.title }}</h5>
+
+<div class="row">
+    <br/>
+    <div class="column large-2 sidebar">
+        <h5> {{ data.category.title}} </h5>
+        <ul class="menu vertical">
+          {% for i in data.categories %} 
+              <li><a href="/category/{{i.slug}}/">{{i.title}}</a></li>
+          {% endfor %}
+        </ul>
+    </div>
+
+
+    <div class="column large-10">
+        <div class="row small-up-2 large-up-4">
+            {% for item in data.products %}
+                <div class="column">
+                    {% thumbnail item.photo "300x400" crop="center" as im %}
+                        <img class="thumbnail" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
+                    <h5> {{ item.title }} </h5>
+                    <p> {{ item.price }} руб. </p>
+                    <button 
+                        onclick="basket.add_item({{item.id}},1,this); return false;"
+                        class="radius button expanded">В корзину</a>
+                </div>
+            {% endfor %}
         </div>
     </div>
-{% endfor %}
+</div>
+
 {% endblock %}

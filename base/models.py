@@ -5,13 +5,18 @@ from django.conf import settings
 from sorl.thumbnail import ImageField
 from django.contrib.auth.models import User
 
+class SessionBasket(models.Model):
+    session_key = models.TextField()
+    creation_ts = models.DateField(auto_now_add = True)
+    
+
 class BasketProduct(models.Model):
-    user = models.ForeignKey(User)
+    session = models.ForeignKey(SessionBasket)
     product = models.ForeignKey('Product')
     quantity= models.IntegerField(default=1)
 
 class Order(models.Model):
-    user = models.ForeignKey(User)
+    #user = models.ForeignKey(User)
     creation_ts = models.DateField(auto_now_add = True)
     phone   = models.TextField()
     comment = models.TextField()

@@ -7,36 +7,40 @@
 {% load thumbnail %}
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Foundation | Welcome</title>
+<title></title>
 <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/header.css' %}"> 
+<link rel="stylesheet" href="{% static 'bower_components/foundation-icon-fonts/foundation-icons.css' %}">
+<link rel="stylesheet" href="{% static 'bower_components/foundation/css/normalize.css' %}"> 
 </head>
 <body>
- 
-<div class="top-bar">
-<div class="top-bar-left">
-<ul class="menu">
-        <li class="menu-text">
-        <img src="{% static 'logo.png' %}" /> Grumpy Cat Shop</li>
-        {% category_menu as cm %}
-        {% for i in cm %}
-        <li><a href="#">{{ i.title }} </a></li>
-        {% endfor %}
-        <li>
-            <strong>Items in basket: {% basket_info %}</strong>
-        </li>
-</ul>
+<div class="">
+  <div style="color:#8f8f8f; font-size:13px; text-transform:uppercase;" class="large-6 columns">г. Москва ул. Горчякова-Горбунова, д2. тел: 200-300-52</div>
+  <div class="large-6 columns" style="text-align:right; float:right;"><span class="fi-shopping-cart"> Cart </span>: <span id="basket_counter"> 0 </span></div>
 </div>
-<!--
-<div class="top-bar-right">
-<ul class="menu">
-<li><a href="#">Three</a></li>
-<li><a href="#">Four</a></li>
-<li><a href="#">Five</a></li>
-<li><a href="#">Six</a></li>
-</ul>
+<header class="header">
+  <div class="row">
+    <div class="small-12 columns">
+      <p class="slogan">
+        <a href="/">
+          <img src="{% static 'logo.png' %}" /> 
+        </a>
+        </p>
+      <p class="slogan">Our Funny Shop</p>
+      <p class="links">
+            {% category_menu as cm %}
+                {% for i in cm %}
+                    <a href="/category/{{i.slug}}/"><span>{{ i.title }}</span></a>
+                {% endfor %}
+      </p>
+    </div>
+  </div>
+</header>
+<div class="row column text-center">
+<hr>
 </div>
--->
-</div>
+
 {% block content %} 
 <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
 <ul class="orbit-container">
@@ -65,7 +69,9 @@
             {% endthumbnail %}
             <h5> {{ item.title }} </h5>
             <p> {{ item.price }} руб. </p>
-            <a href="#" class="button expanded">В корзину</a>
+            <a href="#"
+                onclick="basket.add_item({{item.product_id}},1)"
+                 class="button expanded">В корзину</a>
         </div>
     {% endfor %}
 </div>
@@ -236,8 +242,34 @@
 </div>
 </div>
 {% endblock %}
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<br/>
+<br/>
+<br/>
+<hr/>
+<br/>
+<footer class="footer">
+  <div class="row">
+    <div class="small-12 columns">
+      <p class="slogan">Finger-lickin' good</p>
+      <p class="links">
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">Pricing</a>
+        <a href="#">About</a>
+        <a href="#">Faq</a>
+        <a href="#">Contact</a>
+      </p>
+      <p class="copywrite">Copywrite not copypwrite © 2015</p>
+    </div>
+  </div>
+</footer>
+
+
+<script src="{% static 'bower_components/foundation/js/vendor/jquery.js' %}"> </script> 
+<!-- <script src="{% static 'bower_components/foundation/js/foundation.js' %}"> </script> --> 
 <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<script src="{% static 'js/basket.js' %}"> </script> 
 <script>
       $(document).foundation();
     </script>

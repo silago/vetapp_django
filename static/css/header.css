@@ -1,0 +1,39 @@
+@charset "UTF-8";
+.header {
+    background-color: #fefefe;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 4rem;
+}
+.header p.slogan {
+    color: #8d9093;
+    font-size: 1.8rem;
+    margin: 0 0 1rem;
+}
+.header p.copywrite {
+    color: #8f9296;
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.header .links a:hover span {
+    text-decoration:underline;
+}
+
+.header .links a {
+    list-style: none;
+    font-weight: bold;
+    color: #242424;
+    padding: 3rem 0 2rem;
+    margin: 0;
+}
+.header .links a::after {
+    text-decoration:none;
+    content: "•";
+    padding: 0 0.4rem 0 0.8rem;
+}
+.header .links a:last-child::after {
+    content: "";
+    padding: 0 0.4rem 0 0.8rem;
+}
+

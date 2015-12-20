@@ -1,0 +1,14 @@
+{
+  "name": "orbit",
+  "homepage": "https://github.com/zurb/orbit",
+  "_release": "3f681fb9fb",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3f681fb9fb1920d54591e839fece23d437281373"
+  },
+  "_source": "git://github.com/zurb/orbit.git",
+  "_target": "*",
+  "_originalSource": "orbit",
+  "_direct": true
+}
