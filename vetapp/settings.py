@@ -135,10 +135,9 @@ THUMBNAIL_DEBUG = True
 
 CACHES = {
     'default': {
-        "OPTIONS": {
-            "PICKLE_VERSION": 2  # Use the latest protocol version (default), for py2 compatibility use 2
-        },
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'cache_table',
     }
 }
+
+
