@@ -6,6 +6,7 @@ import json
 from django.contrib.sessions.backends.db import SessionStore
 from functools import wraps
 from datetime import datetime, timedelta
+from django.db.models import Q
 DAYS_BASKET_LIFETIME = 2
 
 def check_session_decorator(function):
@@ -28,8 +29,8 @@ def category(request,cslug):
     data = {}
     category = Category.objects.get(slug=cslug)
     data['category'] = category
-    data['categories']     = Category.objects.filter(parent=category)
-    data['products'] = Product.objects.filter(category__in=data['categories'])
+    data['categories']     = Category.objects.all()
+    data['products'] = Product.objects.filter(Q(category__in=Category.objects.filter(parent=category)) | Q (category=category)  )
     return render_to_response('category.html',{'data':data})
 
 def product(request,pslug):

@@ -9,10 +9,14 @@
 <div class="row">
     <br/>
     <div class="column large-2 sidebar">
-        <h5> {{ data.category.title}} </h5>
-        <ul class="menu vertical">
+            <h5 style="display:none;"> {{ data.category.title}} </h5>
+        <ul style="border:1px solid #9f9f9f; border-radius:5px;" class="menu vertical">
           {% for i in data.categories %} 
-              <li><a href="/category/{{i.slug}}/">{{i.title}}</a></li>
+              {% if i.parent %}
+                  <li><a href="/category/{{i.slug}}/">{{i.title}}</a></li>
+              {% else %}
+                  <li style="text-transform:uppercase;"><a href="/category/{{i.slug}}/">{{i.title}}</a></li>
+              {% endif %}
           {% endfor %}
         </ul>
     </div>
