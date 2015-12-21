@@ -8,7 +8,7 @@
 
 <div class="row">
     <br/>
-    <div class="column large-3 sidebar">
+    <div class="column large-2 sidebar">
             <h5 style="display:none;"> {{ data.category.title}} </h5>
         <ul style="font-size:14px;" class="menu vertical">
           {% for i in data.categories %} 
@@ -22,19 +22,21 @@
     </div>
 
 
-    <div class="column large-9">
-        <div class="row small-up-2 large-up-4">
+    <div class="column large-10">
+        <div class="row small-up-2 large-up-6">
             {% for item in data.products %}
-                <div class="column">
+                <div class="column text-center">
                     {% thumbnail item.photo "300x400" crop="center" as im %}
                         <img class="thumbnail" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                     {% endthumbnail %}
-                    <h5> {{ item.title }} </h5>
-                    <p> {{ item.price }} руб. </p>
-                    <br/>
-                    <button 
-                        onclick="basket.add_item({{item.id}},1,this); return false;"
-                        class="radius button small">В корзину</button>
+                    <center>
+                        <h5> {{ item.title }} </h5>
+                        <p> {{ item.price }} руб. </p>
+
+                        <button 
+                            onclick="basket.add_item({{item.id}},1,this); return false;"
+                            class="radius expanded button small">В корзину</button>
+                    </center>
                 </div>
             {% endfor %}
         </div>
