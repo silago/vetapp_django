@@ -1,0 +1,9 @@
+.sidebar ul li a:hover {
+    background-color:#efefef;
+     transition: background-color 0.3s ease-out;
+}
+
+.sidebar ul li a {
+    background-color:inherit;
+     transition: background-color 1.3s ease-out;
+}

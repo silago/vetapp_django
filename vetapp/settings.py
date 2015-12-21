@@ -26,6 +26,7 @@ SECRET_KEY = '4z@zt&^vz_u+qjs$5iodut1ce_@z*bc*!$ppwfbavhdq)##tp-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+SITE_ID = 1
 
 ALLOWED_HOSTS = []
 DEFAULT_INDEX_TABLESPACE=''
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
 ]
 
 MIDDLEWARE_CLASSES = [
