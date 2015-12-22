@@ -16,9 +16,10 @@
 <link rel="stylesheet" href="{% static 'bower_components/foundation/css/normalize.css' %}"> 
 </head>
 <body>
-<div class="">
-  <div style="color:#8f8f8f; font-size:13px; text-transform:uppercase;" class="large-6 columns">г. Москва ул. Горчякова-Горбунова, д2. тел: 200-300-52</div>
-  <div class="large-6 columns" style="text-align:right; float:right;"><span class="fi-shopping-cart"> Cart </span>: <span id="basket_counter"> 0 </span></div>
+<div style="border:10px solid #242424; background-color:#242424; color:#fefefe;">
+  <div style="font-size:13px; text-transform:uppercase;" class="large-6 columns">г. Москва ул. Горчякова-Горбунова, д2. тел: 200-300-52</div>
+  <div class="large-6 columns" style="text-align:right; float:right;"><span class="fi-shopping-cart"> Товаров в корзине </span>: <span id="basket_counter"> 0 </span></div>
+  <div style="clear:both;"></div>
 </div>
 <header class="header">
   <div class="row">
@@ -28,7 +29,7 @@
           <img src="{% static 'logo.png' %}" /> 
         </a>
         </p>
-      <p class="slogan">Our Funny Shop</p>
+      <p class="slogan">ZooShop.ru</p>
       <p class="links">
             {% category_menu as cm %}
                 {% for i in cm %}
@@ -39,11 +40,8 @@
     </div>
   </div>
 </header>
-<div class="row column text-center">
-<hr>
 <br/>
 <br/>
-</div>
 
 {% block content %} 
 {% endblock %}
