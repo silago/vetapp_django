@@ -7,5 +7,14 @@
 
 .sidebar ul li a {
     background-color:transparent;
-     transition: background-color 1.3s ease-out;
+    transition: background-color 1.3s ease-out;
+}
+
+
+.sidebar ul li sub {
+    display:none;        
+}
+
+.sidebar ul li:active sub {
+    display:block;        
 }

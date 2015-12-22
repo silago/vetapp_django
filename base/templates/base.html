@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="{% static 'bower_components/foundation/css/normalize.css' %}"> 
 </head>
 <body>
-<div class="">
+<div class="row">
   <div style="color:#8f8f8f; font-size:13px; text-transform:uppercase;" class="large-6 columns">г. Москва ул. Горчякова-Горбунова, д2. тел: 200-300-52</div>
   <div class="large-6 columns" style="text-align:right; float:right;"><span class="fi-shopping-cart"> Cart </span>: <span id="basket_counter"> 0 </span></div>
 </div>
@@ -45,9 +45,29 @@
 <br/>
 </div>
 
-{% block content %} 
-{% endblock %}
-
+<div class="row">
+    <br/>
+    <div class="column large-2 sidebar">
+            <h5 style="display:none;"> {{ data.category.title}} </h5>
+        <ul style="font-size:14px;" class="menu vertical">
+          {% for i in data.menu %} 
+              <li style="font-weight:bold; text-transform:uppercase;">
+                <a href="/category/{{i.item.slug}}/">{{i.item.title}}</a>
+                {% if {{ len(i.children) %}
+                    <ul class="sub">
+                      {% for sub in i.children %} 
+                          <li><a href="/category/{{sub.slug}}/">{sub.title}}</a></li>
+                      {% endfor %}
+                    </ul>
+                {% endif %}
+          {% endfor %}
+        </ul>
+    </div>
+    <div class="column large-10">
+        {% block content %} 
+        {% endblock %}
+    </div>
+</div>
 <br/>
 <br/>
 <br/>

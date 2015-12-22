@@ -18,11 +18,28 @@ def check_session_decorator(function):
         return function(request, *args, **kwargs)
     return decorator
 
+
+def get_menu(parent = False):
+    #result = [{'item':{},'children':[]}]
+    result = []
+    if (not parent):
+        data = Category.objects.filter(parent_isnull=True)
+    else:
+        data = Category.objects.filter(parent=parent)
+    for item in data:
+        result.append({
+            'item':item,
+            'children':get_menu(item),
+            })
+    return result
+
+
 @check_session_decorator
 def index(request):
     data = {}
-    data['latest'] = Product.objects.all().order_by('creation_ts')[:4]
-    data['products'] =  Product.objects.all().order_by('creation_ts')[4:10]
+    data['latest']   = Product.objects.all().order_by('creation_ts')[:4]
+    data['products'] = Product.objects.all().order_by('creation_ts')[4:10]
+    data['menu']     = get_menu(False)
     return render_to_response('index.html',{'data':data})
 
 def category(request,cslug):
