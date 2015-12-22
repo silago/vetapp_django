@@ -3,14 +3,25 @@
 {% load thumbnail %}
 {% block content %} 
 <!--
-<div class="row small-up-2 large-up-4">
+  <div
+     class="row">
+    <nav 
+    style="margin-left:30px;"
+    aria-label="You are here:" role="navigation">
+      <ul class="breadcrumbs">
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">Для кошек</a></li>
+        <li>
+          <span class="show-for-sr">Current: </span> Корма
+        </li>
+      </ul>
+    </nav>
+</div>
 -->
-
-        <div class="row small-up-2 large-up-6">
             {% for item in data.products %}
-                <div class="column text-center">
+                <div class="column text-center" style="padding:20px; border:1px solid lightgray;">
                     {% thumbnail item.photo "300x400" crop="center" as im %}
-                        <img class="thumbnail" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                        <img class="" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                     {% endthumbnail %}
                     <center>
                         <h5> {{ item.title }} </h5>
@@ -21,6 +32,4 @@
                     </center>
                 </div>
             {% endfor %}
-        </div>
-
 {% endblock %}
