@@ -3,7 +3,6 @@
                                 <head>
 {% load staticfiles %}
 {% load category_menu %}
-{% load basket_info %}
 {% load thumbnail %}
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,10 +15,12 @@
 <link rel="stylesheet" href="{% static 'bower_components/foundation/css/normalize.css' %}"> 
 </head>
 <body>
-<div class="row">
-  <div style="color:#8f8f8f; font-size:13px; text-transform:uppercase;" class="large-6 columns">г. Москва ул. Горчякова-Горбунова, д2. тел: 200-300-52</div>
-  <div class="large-6 columns" style="text-align:right; float:right;"><span class="fi-shopping-cart"> Cart </span>: <span id="basket_counter"> 0 </span></div>
-</div>
+<div class="row box-shadow">
+ <div class="orange-top">   
+  <div style="font-size:13px; text-transform:uppercase;" class="large-6 columns">г. Москва ул. Горчякова-Горбунова, д2. тел: 200-300-52</div>
+  <div class="large-6 columns" style="text-align:right; float:right;"><span class="fi-shopping-cart"> <a href="/basket/">Cart </span>: <span id="basket_counter"> 0 </span></div>
+  <div style="clear:both;"></div>
+  </div>
 <header class="header">
   <div class="row">
     <div class="small-12 columns">
@@ -40,20 +41,20 @@
   </div>
 </header>
 <br/>
+<hr/>
 <br/>
 
-<div class="row">
     <br/>
     <div class="column large-2 sidebar">
             <h5 style="display:none;"> {{ data.category.title}} </h5>
         <ul style="font-size:14px;" class="menu vertical">
           {% for i in data.menu %} 
-              <li style="font-weight:bold; text-transform:uppercase;">
-                <a href="/category/{{i.item.slug}}/">{{i.item.title}}</a>
-                {% if {{ len(i.children) %}
+              <li onclick="$(this).toggleClass('active');" style="">
+                <a>{{i.item.title}}</a>
+                {% if i.children|length > 0 %}
                     <ul class="sub">
                       {% for sub in i.children %} 
-                          <li><a href="/category/{{sub.slug}}/">{sub.title}}</a></li>
+                      <li><a href="/category/{{sub.item.slug}}/">{{sub.item.title}}</a></li>
                       {% endfor %}
                     </ul>
                 {% endif %}
@@ -64,7 +65,6 @@
         {% block content %} 
         {% endblock %}
     </div>
-</div>
 <br/>
 <br/>
 <br/>
@@ -83,12 +83,15 @@
     </div>
   </div>
 </footer>
+</div>
 
 
 <script src="{% static 'bower_components/foundation/js/vendor/jquery.js' %}"> </script> 
 <!-- <script src="{% static 'bower_components/foundation/js/foundation.js' %}"> </script> --> 
 <script src="{% static 'js/foundation.js' %}"> </script> 
 <script src="{% static 'js/basket.js' %}"> </script> 
+<script src="{% static 'bower_components/slidejs3/source/jquery.slides.js' %}"> </script> 
+<script src="{% static 'js/ready.js' %}"> </script> 
 <script>
       $(document).foundation();
     </script>

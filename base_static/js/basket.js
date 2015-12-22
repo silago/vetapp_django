@@ -18,6 +18,12 @@ window.basket = {
             }
             /* upp basket counter */
         }})
-    }
+    },
+    get_count: function() {
+        var url = this.basket_url+'get/';
+        $.ajax({url:url,dataType:'json',success:function(data){
+            $('#basket_counter').html(data.data);
+        }})
+    },
 }
 

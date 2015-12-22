@@ -6,7 +6,9 @@
     padding: 2rem;
 }
 .header p.slogan {
-    color: #8d9093;
+    text-shadow:0px 0px 1px deeppink;
+    font-weight:bold;
+    color: deeppink;
     font-size: 1.8rem;
     margin: 0 0 1rem;
 }

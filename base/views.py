@@ -23,7 +23,7 @@ def get_menu(parent = False):
     #result = [{'item':{},'children':[]}]
     result = []
     if (not parent):
-        data = Category.objects.filter(parent_isnull=True)
+        data = Category.objects.filter(parent__isnull=True)
     else:
         data = Category.objects.filter(parent=parent)
     for item in data:
@@ -46,16 +46,39 @@ def category(request,cslug):
     data = {}
     category = Category.objects.get(slug=cslug)
     data['category'] = category
+    data['menu']     = get_menu(False)
     data['categories']     = Category.objects.all()
     data['products'] = Product.objects.filter(Q(category__in=Category.objects.filter(parent=category)) | Q (category=category)  )
     return render_to_response('category.html',{'data':data})
 
 def product(request,pslug):
     data = {}
+    data['menu']     = get_menu(False)
     data['product'] = Product.objects.get(slug=pslug)
     return render_to_response('product.html',{'data':data})
 
+@check_session_decorator
+def basket(request):
+    basket = get_session_basket(request.session.session_key)
+    result = []
+    for r in BasketProduct.objects.filter(session=basket):
+        item = Product.objects.get(pk=r.product_id)
+        res = {}
+        res['quantity'] = str(r.quantity)
+        res['price'] = item.price
+        res['title'] = item.title 
+        res['total'] = item.price*r.quantity
+        res['slug']  = item.slug 
+        result.append(res)
+    data={'basket':result}
+    data['menu']     = get_menu(False)
+    return render_to_response('basket.html',{'data':data})
 
+def checkout(request):
+    pass
+
+def checkout_done(request):
+    pass
 
 def get_session_basket(session_key):
     try:
@@ -85,11 +108,10 @@ def basket_put(request,product_id,quantity):
     return JsonResponse({'status':'ok','data':result})
 
 @check_session_decorator
-def basket_get():
-    user_id = request.user.user_id
-    if (not user_id): return JsonResponse({'status':'NotFound'})
-    result = BasketProduct.objects.filter(user=user_id)
-    return JsonResponse({'status':'ok','data':json.dumps(result)})
+def basket_get(request):
+    basket = get_session_basket(request.session.session_key)
+    result = BasketProduct.objects.filter(session=basket).count()
+    return JsonResponse({'status':'ok','data':str(result)})
 
 def basket_delete(produt_id):
     user = request.user.id

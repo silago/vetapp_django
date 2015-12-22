@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block content %} 
+<table class="hover">
+  <thead>
+    <tr>
+        <td>
+            Наименование
+        </td>
+        <td>
+            Цена
+        </td>
+        <td>
+            Количество
+        </td>
+        <td>
+            Итого
+        </td>
+    </tr>
+  </thead>
+  {% for item in data.basket %}
+  <tr>
+      <td> {{item.title}} </td>
+      <td> {{item.price}} </td>
+      <td> {{item.quantity}} </td>
+      <td> {{item.total}} </td>
+  </tr>
+  {% endfor %}
+</table>
+<button class="button"> Оформить </button>
+{% endblock %}

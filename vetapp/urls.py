@@ -8,10 +8,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^basket/$',                       base_views.basket), 
     url(r'^category/([\w-]+)/$',            base_views.category), 
     url(r'^product/([\w-]+)/$',             base_views.product), 
     url(r'^basket/put/([\d]+)/([\d]+)/$',   base_views.basket_put), 
-    url(r'^basket/get/([\d]+)/$',           base_views.basket_get), 
+    url(r'^basket/get/$',           base_views.basket_get), 
     url(r'^basket/delete/([\d]+)/$',        base_views.basket_delete), 
     url(r'^$',                              base_views.index), 
 ]
