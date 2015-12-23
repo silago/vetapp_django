@@ -26,10 +26,10 @@
     <div class="small-12 columns">
       <p class="slogan">
         <a href="/">
-          <img src="{% static 'logo.png' %}" /> 
+          <img src="{% static 'logo.png' %}"  style="height:60px"/> 
+      <span class="slogan">ZooShop.ru</span>
         </a>
         </p>
-      <p class="slogan">ZooShop.ru</p>
       <p class="links">
             {% category_menu as cm %}
                 {% for i in cm %}
@@ -40,11 +40,7 @@
     </div>
   </div>
 </header>
-<br/>
 <hr/>
-<br/>
-
-    <br/>
     <div class="column large-2 sidebar">
             <h5 style="display:none;"> {{ data.category.title}} </h5>
         <ul style="font-size:14px;" class="menu vertical">

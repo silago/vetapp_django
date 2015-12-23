@@ -11,6 +11,19 @@
 }
 
 
+.sidebar ul:not(.sub) li.active > a:before {
+    content:"⌄  ";
+}
+.sidebar ul:not(.sub) li > a:before {
+    content:"›  ";
+}
+.sidebar ul li {
+    border-bottom: 1px dashed lightgray;
+}
+
+.sidebar ul li:last-child {
+    border-bottom: none;
+}
 .sidebar ul li a {
     background-color:transparent;
     transition: background-color 1.3s ease-out;
@@ -99,3 +112,17 @@ a.slidesjs-next, a.slidesjs-previous {
   text-decoration: inherit;
   content: "\f123";
 }
+
+
+.row .menu > li > a {
+    color:deeppink;
+}
+
+.row {
+    background-color:#fff;
+}
+
+body {
+    background: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/ignasi_pattern_s.png") repeat scroll 0 0;
+}
+
