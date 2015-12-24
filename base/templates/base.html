@@ -1,95 +1,462 @@
-<!doctype html>
-<html class="no-js" lang="en">
-                                <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 {% load staticfiles %}
 {% load category_menu %}
 {% load thumbnail %}
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title></title>
-<link rel="stylesheet" href="{% static 'css/footer.css' %}"> 
-<link rel="stylesheet" href="{% static 'css/foundation.min.css' %}"> 
-<link rel="stylesheet" href="{% static 'css/header.css' %}"> 
-<link rel="stylesheet" href="{% static 'css/base.css' %}"> 
-<link rel="stylesheet" href="{% static 'bower_components/foundation-icon-fonts/foundation-icons.css' %}">
-<link rel="stylesheet" href="{% static 'bower_components/foundation/css/normalize.css' %}"> 
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | E-Shopper</title>
+    <link href="{% static 'eshopper/css/bootstrap.min.css' %}"      rel="stylesheet">
+    <link href="{% static 'eshopper/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'eshopper/css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'eshopper/css/price-range.css' %}" rel="stylesheet">
+    <link href="{% static 'eshopper/css/animate.css' %}" rel="stylesheet">
+	<link href="{% static 'eshopper/css/main.css' %}" rel="stylesheet">
+	<link href="{% static 'eshopper/css/responsive.css' %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
 <body>
-<div class="row box-shadow">
- <div class="orange-top">   
-  <div style="font-size:13px; text-transform:uppercase;" class="large-6 columns">г. Москва ул. Горчякова-Горбунова, д2. тел: 200-300-52</div>
-  <div class="large-6 columns" style="text-align:right; float:right;"><span class="fi-shopping-cart"> <a href="/basket/">Cart </span>: <span id="basket_counter"> 0 </span></div>
-  <div style="clear:both;"></div>
-  </div>
-<header class="header">
-  <div class="row">
-    <div class="small-12 columns">
-      <p class="slogan">
-        <a href="/">
-          <img src="{% static 'logo.png' %}"  style="height:60px"/> 
-      <span class="slogan">ZooShop.ru</span>
-        </a>
-        </p>
-      <p class="links">
-            {% category_menu as cm %}
-                {% for i in cm %}
-                    <a href="/category/{{i.slug}}/"><span>{{ i.title }}</span></a>
-                {% endfor %}
-                <a href>Оплата и доставка</a>
-      </p>
-    </div>
-  </div>
-</header>
-<hr/>
-    <div class="column large-2 sidebar">
-            <h5 style="display:none;"> {{ data.category.title}} </h5>
-        <ul style="font-size:14px;" class="menu vertical">
-          {% for i in data.menu %} 
-              <li onclick="$(this).toggleClass('active');" style="">
-                <a>{{i.item.title}}</a>
-                {% if i.children|length > 0 %}
-                    <ul class="sub">
-                      {% for sub in i.children %} 
-                      <li><a href="/category/{{sub.item.slug}}/">{{sub.item.title}}</a></li>
-                      {% endfor %}
-                    </ul>
-                {% endif %}
-          {% endfor %}
-        </ul>
-    </div>
-    <div class="column large-10">
-        {% block content %} 
-        {% endblock %}
-    </div>
-<br/>
-<br/>
-<br/>
-<hr/>
-<br/>
-<footer class="footer">
-  <div class="row">
-    <div class="small-12 columns">
-      <p class="slogan">А это подвал сайта</p>
-      <p class="links">
-        <a href="#">Главная</a>
-        <a href="#">Оплата и доставка</a>
-        <a href="#">Контакты</a>
-      </p>
-      <p class="copywrite">Copywrite not copypwrite © 2015</p>
-    </div>
-  </div>
-</footer>
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+                                <li>
+                                    <a href='basket'>
+                                      Товаров в корзине: <span id="basket-counter">0<span></a>
+							    </li>
+                            </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+			</div>
+		</div>
+        <!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="index.html" class="active">Главная</a></li>
+								<li><a href="index.html" class="">Контакты</a></li>
+								<li><a href="index.html" class="">Доставка</a></li>
+								<li><a href="index.html" class="">Оплата</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="Поиск"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+	
+
+    {% block slider %} 
+	<section id="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+						
+						<div class="carousel-inner">
+							<div style="padding:0px;" class="item active">
+                                <img src="{% static 'banners/banner1.png' %}" />
+                            </div>
+							<div style="padding:0px;" class="item">
+                                <img src="{% static 'banners/banner2.png' %}" />
+							</div>
+							
+							<div style="padding:0px;" class="item">
+                                <img src="{% static 'banners/banner3.png' %}" />
+							</div>
+							
+						</div>
+						
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+    {% endblock %}
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Каталог</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+   
+                          {% for i in data.menu %} 
+                            {% if i.children|length > 0 %}
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											{{ i.item.title }}
+										</a>
+									</h4>
+								</div>
+								<div id="sportswear" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+
+                                          {% for sub in i.children %} 
+											<li><a href="/catalog/{{ sub.item.slug }}">{{ sub.item.title}} </a></li>
+                                          {% endfor %}
+										</ul>
+									</div>
+								</div>
+							</div>
+                            {% endif %}
+                            {% if i.children|length = 0  %}
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="/catalog/{{ i.item.slug }}/">{{ i.item.title}}</a></h4>
+								</div>
+							</div>
+                            {% endif %}
+
+                            {% endfor %}
+						</div><!--/category-products-->
+					
+						
+						
+						<div class="shipping text-center"><!--shipping-->
+							<img src="/static/eshopper/images/home/shipping.jpg" alt="" />
+						</div><!--/shipping-->
+					
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Последние поступления</h2>
+
+                        {% block content %} 
+                        {% endblock %}
+                        <!--
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+										<div class="productinfo text-center">
+											<img src="images/home/product1.jpg" alt="" />
+											<h2>$56</h2>
+											<p>Easy Polo Black Edition</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										</div>
+										<div class="product-overlay">
+											<div class="overlay-content">
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+										</div>
+								</div>
+								<div class="choose">
+									<ul class="nav nav-pills nav-justified">
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="images/home/product2.jpg" alt="" />
+										<h2>$56</h2>
+										<p>Easy Polo Black Edition</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>$56</h2>
+											<p>Easy Polo Black Edition</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										</div>
+									</div>
+								</div>
+								<div class="choose">
+									<ul class="nav nav-pills nav-justified">
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="images/home/product3.jpg" alt="" />
+										<h2>$56</h2>
+										<p>Easy Polo Black Edition</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>$56</h2>
+											<p>Easy Polo Black Edition</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										</div>
+									</div>
+								</div>
+								<div class="choose">
+									<ul class="nav nav-pills nav-justified">
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="images/home/product4.jpg" alt="" />
+										<h2>$56</h2>
+										<p>Easy Polo Black Edition</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>$56</h2>
+											<p>Easy Polo Black Edition</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										</div>
+									</div>
+									<img src="images/home/new.png" class="new" alt="" />
+								</div>
+								<div class="choose">
+									<ul class="nav nav-pills nav-justified">
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="images/home/product5.jpg" alt="" />
+										<h2>$56</h2>
+										<p>Easy Polo Black Edition</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>$56</h2>
+											<p>Easy Polo Black Edition</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										</div>
+									</div>
+									<img src="images/home/sale.png" class="new" alt="" />
+								</div>
+								<div class="choose">
+									<ul class="nav nav-pills nav-justified">
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="images/home/product6.jpg" alt="" />
+										<h2>$56</h2>
+										<p>Easy Polo Black Edition</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>$56</h2>
+											<p>Easy Polo Black Edition</p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										</div>
+									</div>
+								</div>
+								<div class="choose">
+									<ul class="nav nav-pills nav-justified">
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+					</div>-->
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+<div style="clear:both;">
+<br/>		
 </div>
+	
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+					</div>
+					<div class="col-sm-7">
+					</div>
+					<div class="col-sm-3">
+						<div class="address">
+							<img src="images/home/map.png" alt="" />
+							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Service</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Online Help</a></li>
+								<li><a href="#">Contact Us</a></li>
+								<li><a href="#">Order Status</a></li>
+								<li><a href="#">Change Location</a></li>
+								<li><a href="#">FAQ’s</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Quock Shop</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">T-Shirt</a></li>
+								<li><a href="#">Mens</a></li>
+								<li><a href="#">Womens</a></li>
+								<li><a href="#">Gift Cards</a></li>
+								<li><a href="#">Shoes</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Policies</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Terms of Use</a></li>
+								<li><a href="#">Privecy Policy</a></li>
+								<li><a href="#">Refund Policy</a></li>
+								<li><a href="#">Billing System</a></li>
+								<li><a href="#">Ticket System</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Company Information</a></li>
+								<li><a href="#">Careers</a></li>
+								<li><a href="#">Store Location</a></li>
+								<li><a href="#">Affillate Program</a></li>
+								<li><a href="#">Copyright</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3 col-sm-offset-1">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<form action="#" class="searchform">
+								<input type="text" placeholder="Your email address" />
+								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+								<p>Get the most recent updates from <br />our site and be updated your self...</p>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
 
-
-<script src="{% static 'bower_components/foundation/js/vendor/jquery.js' %}"> </script> 
-<!-- <script src="{% static 'bower_components/foundation/js/foundation.js' %}"> </script> --> 
-<script src="{% static 'js/foundation.js' %}"> </script> 
-<script src="{% static 'js/basket.js' %}"> </script> 
-<script src="{% static 'bower_components/slidejs3/source/jquery.slides.js' %}"> </script> 
-<script src="{% static 'js/ready.js' %}"> </script> 
-<script>
-      $(document).foundation();
-    </script>
+  
+    <script src="{% static 'eshopper/js/jquery.js' %}"></script>
+	<script src="{% static 'eshopper/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'eshopper/js/jquery.scrollUp.min.js' %}"></script>
+	<script src="{% static 'eshopper/js/price-range.js' %}"></script>
+    <script src="{% static 'eshopper/js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'eshopper/js/main.js' %}"></script>
 </body>
 </html>

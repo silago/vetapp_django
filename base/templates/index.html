@@ -3,26 +3,12 @@
 {% load staticfiles %}
 {% load thumbnail %}
 {% block content %} 
-<div class="orbit columns large-12 " role="region" aria-label="Favorite Space Pictures" data-orbit>
-<div id="slides" >
-    <img alt="slide1" src="{% static 'banners/banner1.png' %}" />
-    <img src="{% static 'banners/banner2.png' %}" />
-    <img src="{% static 'banners/banner3.png' %}" />
-</div>
-</div>
-<br/>
-<br/>
-<hr/>
-<br/>
-<br/>
 
-  <script>
-    $(function() {
-      $('#slides').slidesjs({
-        width: 940,
-        height: 528
-      });
-    });
-  </script>
+        <p>
+            Список пуст
+        </p>
+
+
+
 
 {% endblock %}
