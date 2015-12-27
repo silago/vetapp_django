@@ -2,36 +2,14 @@
 {% load staticfiles %}
 {% load thumbnail %}
 {% block content %} 
-<!--
-  <div
-     class="row">
-    <nav 
-    style="margin-left:30px;"
-    aria-label="You are here:" role="navigation">
-      <ul class="breadcrumbs">
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">Для кошек</a></li>
-        <li>
-          <span class="show-for-sr">Current: </span> Корма
-        </li>
-      </ul>
-    </nav>
-</div>
--->
-        <div class="row small-up-2 large-up-6">
-            {% for item in data.products %}
-                <div class="column text-center" style="padding:20px; border:1px solid lightgray;">
-                    {% thumbnail item.photo "300x400" crop="center" as im %}
-                        <img class="" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                    {% endthumbnail %}
-                    <center>
-                        <h5> {{ item.title }} </h5>
-                        <p> {{ item.price }} руб. </p>
-                        <button 
-                            onclick="basket.add_item({{item.id}},1,this); return false;"
-                            class="radius expanded button small">В корзину</button>
-                    </center>
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">{{data.category.title}}</h2>
+                        {% for item in data.products %}
+						<div class="col-sm-4">
+                            {% include 'item.html' %}
+						</div>
+                        {% endfor %}
+                    </div>
                 </div>
-            {% endfor %}
-        </div>
 {% endblock %}

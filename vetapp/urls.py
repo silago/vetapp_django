@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^checkout/$',                      base_views.checkout), 
     url(r'^category/([\w-]+)/$',            base_views.category), 
     url(r'^product/([\w-]+)/$',             base_views.product), 
-    url(r'^basket/put/([\d]+)/([\d]+)/$',   base_views.basket_put), 
+    url(r'^basket/put/([\d]+)/([\d-]+)/$',   base_views.basket_put), 
     url(r'^basket/get/$',           base_views.basket_get), 
     url(r'^basket/delete/([\d]+)/$',        base_views.basket_delete), 
     url(r'^$',                              base_views.index), 

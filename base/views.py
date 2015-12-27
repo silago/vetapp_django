@@ -37,8 +37,7 @@ def get_menu(parent = False):
 @check_session_decorator
 def index(request):
     data = {}
-    data['latest']   = Product.objects.all().order_by('creation_ts')[:4]
-    data['products'] = Product.objects.all().order_by('creation_ts')[4:10]
+    data['products']   = Product.objects.all().order_by('creation_ts')[:14]
     data['menu']     = get_menu(False)
     return render_to_response('index.html',{'data':data})
 
@@ -62,10 +61,15 @@ def basket(request):
     basket = get_session_basket(request.session.session_key)
     result = []
     for r in BasketProduct.objects.filter(session=basket):
-        item = Product.objects.get(pk=r.product_id)
+        try:
+            item = Product.objects.get(pk=r.product_id)
+        except:
+            r.delete()
+            continue
         res = {}
         res['quantity'] = str(r.quantity)
         res['price'] = item.price
+        res['id'] = item.id
         res['title'] = item.title 
         res['total'] = item.price*r.quantity
         res['slug']  = item.slug 
@@ -89,11 +93,20 @@ def get_session_basket(session_key):
     if (session_basket):
         if session_basket.creation_ts < (datetime.now() - timedelta(days=DAYS_BASKET_LIFETIME)).date():
             BasketProduct.objects.filter(session=session_basket).delete()
-            BasketProduct.save()
+            #BasketProduct.save()
+            session_basket.creation_ts = datetime.now()
+            session_basket.save()
     else: 
         session_basket = SessionBasket(session_key=session_key)
         session_basket.save()
     return session_basket
+
+@check_session_decorator
+def basket_delete(request,product_id):
+    basket = get_session_basket(request.session.session_key)
+    item = BasketProduct.objects.filter(session=basket,product_id=product_id).delete()
+    result = [{'product_id':p.product_id, 'quantity':p.quantity} for p in list( BasketProduct.objects.filter(session=basket))]
+    return JsonResponse({'status':'ok','data':result})
 
 @check_session_decorator
 def basket_put(request,product_id,quantity):
@@ -110,10 +123,7 @@ def basket_put(request,product_id,quantity):
 @check_session_decorator
 def basket_get(request):
     basket = get_session_basket(request.session.session_key)
-    result = BasketProduct.objects.filter(session=basket).count()
-    return JsonResponse({'status':'ok','data':str(result)})
+    result = [{'product_id':p.product_id, 'quantity':p.quantity} for p in list( BasketProduct.objects.filter(session=basket))]
+    return JsonResponse({'status':'ok','data':result})
 
-def basket_delete(produt_id):
-    user = request.user.id
-    pass
 

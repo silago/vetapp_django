@@ -1,0 +1,28 @@
+							
+
+{% load staticfiles %}
+{% load thumbnail %}
+                            <div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+                                        {% thumbnail item.photo "300x400" crop="center" as im %}
+                                            <img class="" src="{{ im.url }}" width="{{ im.width }}" >
+                                        {% endthumbnail %}
+                                        <h2>  {{ item.title }}</h2>
+											<a href="javascript:void(0);" 
+                                             onclick="basket.add_item({{item.id}},1); return false;"
+                                             class="btn btn-default add-to-cart add-to-cart-{{item.id}}"><i class="fa fa-shopping-cart"></i>В корзину</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+                                            <h2> {{ item.price }} руб.</h2>
+											<p>  {{ item.title }}</p>
+											<a href="javascript:void(0);" 
+                                                onclick="basket.add_item({{item.id}},1); return false;"
+                                                class="btn btn-default add-to-cart add-to-cart-{{item.id}}"><i class="fa fa-shopping-cart"></i>
+                                                В корзину 
+                                            </a>
+										</div>
+									</div>
+								</div>
+							</div>
