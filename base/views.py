@@ -1,12 +1,15 @@
 from django.shortcuts import render
+import uuid
+from django.core.context_processors import csrf
 from django.http import Http404, JsonResponse
 from django.shortcuts import render_to_response
-from base.models import Category, Product, BasketProduct, SessionBasket 
+from base.models import Category, Product, BasketProduct, SessionBasket, Order, OrderProducts 
 import json
 from django.contrib.sessions.backends.db import SessionStore
 from functools import wraps
 from datetime import datetime, timedelta
 from django.db.models import Q
+from django.views.decorators.csrf import csrf_protect
 DAYS_BASKET_LIFETIME = 2
 
 def check_session_decorator(function):
@@ -78,11 +81,36 @@ def basket(request):
     data['menu']     = get_menu(False)
     return render_to_response('basket.html',{'data':data})
 
-def checkout(request):
-    pass
 
-def checkout_done(request):
-    pass
+@csrf_protect
+def checkout(request):
+    data = {}
+    if request.method=='POST':
+        input_data = request.POST
+        errors = []
+        for key in ['name','phone','address','email']:
+            if key not in input_data or not input_data[key]:
+                errors.append(key)
+        if (len(errors)>0):
+            data['errors'] = errors
+            return render_to_response('checkout.html',{'data':data})
+        uid = False
+        while (not uid or Order.objects.filter(uid=uid).count()):
+            uid = uuid.uuid4().hex
+        order = Order(uid = uid,name=input_data['name'],email=input_data['email'],address=input_data['address'],phone=input_data['phone'],comment=input_data['comment'] or '')
+        order.save()
+        data['order'] = order
+        basket = get_session_basket(request.session.session_key)
+        products = BasketProduct.objects.filter(session=basket)
+        for prod in products:
+            OrderProducts(order=order,product_id=prod.product_id,quantity=prod.quantity).save()
+        basket.delete()
+        return render_to_response('checkout_ok.html',{'data':data})
+    if request.method=='GET':
+        c = {}
+        c.update(csrf(request))
+        return render_to_response('checkout.html',c)
+
 
 def get_session_basket(session_key):
     try:
@@ -100,6 +128,13 @@ def get_session_basket(session_key):
         session_basket = SessionBasket(session_key=session_key)
         session_basket.save()
     return session_basket
+
+def order(request,order_uid):
+    try:
+        order = Order.objects.get(uid=order_uid)
+        return render_to_response('order.html',{'data':order})
+    except:
+        return render_to_response('404.html',{})
 
 @check_session_decorator
 def basket_delete(request,product_id):

@@ -18,10 +18,16 @@ class BasketProduct(models.Model):
 class Order(models.Model):
     #user = models.ForeignKey(User)
     creation_ts = models.DateField(auto_now_add = True)
+    uid   = models.TextField()
+    status = models.TextField(choices=(('prepare','Подготовка'),('build','Сборка'),('delivering','Доставка'),('complete','Завершен')), default='prepare')
+    name   = models.TextField()
+    email   = models.TextField()
+    address   = models.TextField()
     phone   = models.TextField()
-    comment = models.TextField()
+    comment = models.TextField(null=True, blank=True)
 
 class OrderProducts(models.Model):
+    order = models.ForeignKey('Order')
     product = models.ForeignKey('Product')
     quantity= models.IntegerField(default=1)
     

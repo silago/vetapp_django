@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block slider %} 
+{% endblock %}
+{% block menu %} 
+{% endblock %}
+{% block content %} 
+
+<div class="col-sm-12">
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="/">Главная</a></li>
+				  <li><a href="/basket/">Корзина</a></li>
+				  <li class="active">Оформление</li>
+				</ol>
+			</div>
+
+			<div class="shopper-informations">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="shopper-info">
+							<p>Информация о заказе</p>
+							<form method="POST" action="/checkout/">
+                                {% csrf_token %}
+								<input name="name"    {% if 'name'    in data.errors %} class="error" {% endif %}   type="text" placeholder="Ф.И.О.">
+								<input name="email"   {% if 'email'   in data.errors %} class="error" {% endif %}   type="text" placeholder="Email">
+								<input name="phone"   {% if 'phone'   in data.errors %} class="error" {% endif %}   type="text" placeholder="Телефон">
+								<input name="address" {% if 'address' in data.errors %} class="error" {% endif %}   type="text" placeholder="Адрес доставки">
+                                <textarea name="comment" placeholder="Комментарий" >Комментарий к заказу</textarea>
+                                </br>
+                                <div class="col-sm-2">
+                                    <input type="submit" class="btn btn-primary" value="Оформить" />
+                                </div>
+							</form>
+						</div>
+					</div>
+                </div>
+           </div>
+    </section> 
+    </div> 
+{% endblock %}

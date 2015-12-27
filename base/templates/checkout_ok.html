@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block slider %} 
+{% endblock %}
+{% block menu %} 
+{% endblock %}
+{% block content %} 
+
+    <h2> Заказ успешно оформлен </h2>
+    <p> 
+        Информация о заказе отправлена ва на email. <br/>
+        По следующей ссылке вы можете отслеживать состояние заказа: 
+        <a href="/order/status/{{data.order.uid}}/">
+            /order/status/{{data.order.uid}}/
+        </a>
+    <p>
+{% endblock %}
