@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^product/([\w-]+)/$',             base_views.product), 
     url(r'^basket/put/([\d]+)/([\d-]+)/$',   base_views.basket_put), 
     url(r'^basket/get/$',           base_views.basket_get), 
+    url(r'^search/([^/]+)/$',           base_views.search), 
     url(r'^order/status/([\w-]+)/$',           base_views.order), 
     url(r'^basket/delete/([\d]+)/$',        base_views.basket_delete), 
     url(r'^$',                              base_views.index), 

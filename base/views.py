@@ -129,6 +129,12 @@ def get_session_basket(session_key):
         session_basket.save()
     return session_basket
 
+def search(request,q):
+    data = {}
+    data['products'] = Product.objects.filter(title__contains=q)
+    return render_to_response('search.html',{'data':data})
+    
+
 def order(request,order_uid):
     try:
         order = Order.objects.get(uid=order_uid)

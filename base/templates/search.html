@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block slider %} 
+{% endblock %}
+{% block content %} 
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Результаты поиска</h2>
+                        {% for item in data.products %}
+						<div class="col-sm-4">
+                            {% include 'item.html' %}
+						</div>
+                        {% endfor %}
+                    </div>
+                </div>
+{% endblock %}
