@@ -86,7 +86,9 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Поиск"/>
+							<input 
+                            onkeypress="searchOnEnter(event,this);"
+                            type="text" placeholder="Поиск"/>
 
 						</div>
 					</div>
@@ -110,14 +112,14 @@
 						
 						<div class="carousel-inner">
 							<div style="padding:0px;" class="item active">
-                                <img src="{% static 'banners/banner1.png' %}" />
+                                <img src="{% static 'banners/1.jpg' %}" />
                             </div>
 							<div style="padding:0px;" class="item">
-                                <img src="{% static 'banners/banner2.png' %}" />
+                                <img src="{% static 'banners/2.jpg' %}" />
 							</div>
 							
 							<div style="padding:0px;" class="item">
-                                <img src="{% static 'banners/banner3.png' %}" />
+                                <img src="{% static 'banners/3.jpg' %}" />
 							</div>
 							
 						</div>
@@ -233,60 +235,54 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="single-widget">
-							<h2>Service</h2>
+							<h2>Информация</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Online Help</a></li>
-								<li><a href="#">Contact Us</a></li>
-								<li><a href="#">Order Status</a></li>
-								<li><a href="#">Change Location</a></li>
-								<li><a href="#">FAQ’s</a></li>
+                                {% get_flatpages as flatpages %}
+                                {% for page in flatpages %}
+                                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                                {% endfor %}
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-2">
 						<div class="single-widget">
-							<h2>Quock Shop</h2>
+							<h2>Товары</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">T-Shirt</a></li>
-								<li><a href="#">Mens</a></li>
-								<li><a href="#">Womens</a></li>
-								<li><a href="#">Gift Cards</a></li>
-								<li><a href="#">Shoes</a></li>
+                                {% for i in data.menu %} 
+                                <li><a href="/categoty/{{i.item.slug}}/">{{i.item.title}}</a></li>
+                                {% endfor %}
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="single-widget">
-							<h2>Policies</h2>
+							<h2>Контакты</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Terms of Use</a></li>
-								<li><a href="#">Privecy Policy</a></li>
-								<li><a href="#">Refund Policy</a></li>
-								<li><a href="#">Billing System</a></li>
-								<li><a href="#">Ticket System</a></li>
+								<li><p>Email:&nbsp; <a style="" href="mailto:mail@some.ru">mail@some.ru</a></p></li>
+								<li><p>Телефон: <a href="callto:123456789">(123)456789</a></p></li>
+								<li><p>Адрес: <a href="https://maps.yandex.ru/213/moscow/?ll=37.601081%2C55.752217&z=14&whatshere[point]=37.614900%2C55.749894&whatshere[zoom]=12">Земляной вал а2 к 3</a></p></li>
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-4 col-sm-offset-1">
 						<div class="single-widget">
-							<h2>About Shopper</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Company Information</a></li>
-								<li><a href="#">Careers</a></li>
-								<li><a href="#">Store Location</a></li>
-								<li><a href="#">Affillate Program</a></li>
-								<li><a href="#">Copyright</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-3 col-sm-offset-1">
-						<div class="single-widget">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <img src="/static/clock.png" style="max-width:100%;"/>
+                                </div>
+                                <div class="col-sm-7">
+                                    <h2><strong>Режим работы:</strong></h2>
+                                    <p>Мы открыты ежедневно с 10:00 по 20:00</p>
+                                </div>
+                            </div>
+                            <!--
 							<h2>About Shopper</h2>
 							<form action="#" class="searchform">
 								<input type="text" placeholder="Your email address" />
 								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
 								<p>Get the most recent updates from <br />our site and be updated your self...</p>
 							</form>
+                            -->
 						</div>
 					</div>
 					

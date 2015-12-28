@@ -131,6 +131,7 @@ def get_session_basket(session_key):
 
 def search(request,q):
     data = {}
+    data['menu']     = get_menu(False)
     data['products'] = Product.objects.filter(title__contains=q)
     return render_to_response('search.html',{'data':data})
     
