@@ -1,7 +1,15 @@
 
+window.minus_html = function(obj) {
+    $(obj).val($(obj).val()-1);
+}
+
+window.plus_html = function(obj) {
+    $(obj).val(parseInt($(obj).val())+1);
+}
+
 window.basket = { 
     basket_url: '/basket/',
-    add_item: function(item_id,quantity,obj) {
+    add_item: function(item_id,quantity) {
         var url = this.basket_url+'put/'+item_id+'/'+quantity;
         $.ajax({url:url,dataType:'json',success:function(data) {
             var items = data.data;
@@ -9,17 +17,18 @@ window.basket = {
             for (var i=0; i<items.length; i++) {
                 count+=parseInt(items[i].quantity);
             }
-            alert(count);
             $('#basket_counter').html(count);
-            if (obj) {
+            var obj = $('.add-to-cart-'+item_id);
+            if (typeof obj!='undefined') {
                 $(obj).html('Товар добавлен')
+                $(obj).addClass('secondary');
                 $(obj).attr('disabled','disabled');
             }
             /* upp basket counter */
         }})
     },
-    get_items: function() {
-        var url = this.basket_url+'get/';
+    del_item: function(item_id) {
+        var url = this.basket_url+'delete/'+item_id+'/';
         $.ajax({url:url,dataType:'json',success:function(data) {
             var items = data.data;
             var count = 0;
@@ -27,14 +36,18 @@ window.basket = {
                 count+=parseInt(items[i].quantity);
             }
             $('#basket_counter').html(count);
-            if (obj) {
-                $(obj).html('Товар в корзине')
-                $(obj).addClass('secondary');
-                $(obj).attr('disabled','disabled');
-            }
-            /* upp basket counter */
         }})
-
-    }
+    },
+    get_count: function() {
+        var url = this.basket_url+'get/';
+        $.ajax({url:url,dataType:'json',success:function(data){
+            var items = data.data;
+            var count = 0;
+            for (var i=0; i<items.length; i++) {
+                count+=parseInt(items[i].quantity);
+            }
+            $('#basket_counter').html(count);
+        }})
+    },
 }
 
