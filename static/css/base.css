@@ -1,3 +1,58 @@
 input.error {
     border:1px solid red;
 }
+
+#header .contactinfo .nav h5 {
+    font-family: Helvetica;
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+#header .contactinfo .nav li.right {
+    float:right;
+}
+#header .header_top {
+    background-color:#d8ffd8!important;
+}
+
+#header .contactinfo {
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+body {
+    background-image: url('/static/paper.png');
+}
+
+.header-bottom > .container:after { 
+    content:" ";
+    width:100%;
+    margin-top:20px;
+    border-bottom:1px solid lightgray;
+}
+
+section > .container {
+    background:#fff;
+    border-bottom:20px solid #fff;
+    padding-bottom:0px!important;
+}
+
+#slider {
+    padding-bottom:0px!important;
+}
+
+#slider .container {
+    border-bottom:20px solid #fff;
+}
+
+.header-bottom {
+    padding-bottom:0px;
+    padding-top:0px;
+}
+
+.header-bottom > .container {
+    border-top:30px solid #fff;
+    border-bottom:30px solid #fff;
+    background-color:#fff;
+}
