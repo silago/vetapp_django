@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'tinymce',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -59,7 +60,6 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'vetapp.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

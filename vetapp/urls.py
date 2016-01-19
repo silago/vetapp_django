@@ -6,11 +6,13 @@ from django.conf.urls.static import static
 #from django.contrib.flatpages import views
 
 urlpatterns = [
+    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^basket/$',                       base_views.basket), 
     url(r'^checkout/$',                      base_views.checkout), 
     url(r'^category/([\w-]+)/$',            base_views.category), 
+    url(r'^category/([\w-]+)/([\w-]+)/$',            base_views.category), 
     url(r'^product/([\w-]+)/$',             base_views.product), 
     url(r'^basket/put/([\d]+)/([\d-]+)/$',   base_views.basket_put), 
     url(r'^basket/get/$',           base_views.basket_get), 

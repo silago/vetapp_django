@@ -52,5 +52,10 @@ class Product(models.Model):
     price = models.FloatField()
     quantity = models.IntegerField(default = 0 )
     creation_ts = models.DateField(auto_now_add = True)
+    def __str__(self):
+        return self.title
+
+class Slider(models.Model):
+    photo = models.ImageField(null=True, blank=True)
 
 # Create your models here.
