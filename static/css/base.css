@@ -57,6 +57,7 @@ section > .container {
     background-color:#fff;
 }
 
-.left-sidebar  a.active {
-    color: #fdb45e;
+
+.left-sidebar a.active {
+    color: #fdb45e!important;
 }
