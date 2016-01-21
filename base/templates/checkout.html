@@ -28,8 +28,29 @@
 								<input name="name"    {% if 'name'    in data.errors %} class="error" {% endif %}   type="text" placeholder="Ф.И.О.">
 								<input name="email"   {% if 'email'   in data.errors %} class="error" {% endif %}   type="text" placeholder="Email">
 								<input name="phone"   {% if 'phone'   in data.errors %} class="error" {% endif %}   type="text" placeholder="Телефон">
+                                <script> 
+                                    function selfdelivery(obj) {
+                                        if (!$('[name=selfdelivery]').prop('checked')) {
+                                            $('[name=selfdelivery]').prop('checked',true);;
+                                            $('[name=address]').val('');
+                                            $('[name=selfdelivery]').val('Самовывоз');
+                                            $('[name=address]').hide(100);
+                                            $(obj).find('span').html('☑');
+                                        } else {
+                                            $(obj).find('span').html('☐');
+                                            $(obj).find('span').html('☐');
+                                            $('[name=selfdelivery]').prop('checked',false);;
+                                            $('[name=selfdelivery]').val('');
+                                            $('[name=address]').show(100);
+                                        } 
+                                    }
+                                </script>
+                                <a style="color:black; font-weight:bold;" href="javascript:void(0);" onclick="selfdelivery(this);">Самовывоз: 
+                                    <span >☐</span>
+                                    <input type="checkbox" style="display:none;" value="Самовывоз" name="selfdelivery" /></a><br/>
+                                <br/>
 								<input name="address" {% if 'address' in data.errors %} class="error" {% endif %}   type="text" placeholder="Адрес доставки">
-                                <textarea name="comment" placeholder="Комментарий" >Комментарий к заказу</textarea>
+                                <textarea name="comment" placeholder="Комментарий" ></textarea>
                                 </br>
                                 <div class="col-sm-2">
                                     <input type="submit" class="btn btn-primary" value="Оформить" />
