@@ -34,14 +34,25 @@ class OrderProducts(models.Model):
     
 class Category(models.Model):
     title = models.CharField(max_length=200)
-    slug = AutoSlugField(populate_from='title')
+    slug = AutoSlugField(populate_from='title', unique=True)
     parent = models.ForeignKey('Category', null=True, blank=True)
     photo = ImageField(null=True, blank=True)
     def save(self):
         self.slug  = slugify(self.title)
+        if (self.parent): self.slug = self.parent.slug+'_'+self.slug
+        counter = 0
+        original_slug = self.slug
+        while (Category.objects.exclude(id=self.id or 0).filter(slug=self.slug).count()>0):
+            counter+=counter
+            self.slug = original_slug+'_'+str(counter)
+
         super(Category,self).save()
     def __str__(self):
-        return self.title
+        result = ''
+        if (self.parent):
+            result+=self.parent.title
+        result+=self.title
+        return result
 
 class Product(models.Model):
     title = models.CharField(max_length=200)

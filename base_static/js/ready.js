@@ -2,6 +2,7 @@
 
     $(function() {
        basket.get_count();
+       $('.sub_in').closest('div').parent().addClass('in');
     })
 
 

@@ -46,6 +46,7 @@ def index(request):
 
 def category(request,cslug):
     data = {}
+    data['current_place']=cslug
     category = Category.objects.get(slug=cslug)
     data['category'] = category
     data['menu']     = get_menu(False)
@@ -88,9 +89,15 @@ def checkout(request):
     if request.method=='POST':
         input_data = request.POST
         errors = []
-        for key in ['name','phone','address','email']:
+        for key in ['name','phone','email']:
             if key not in input_data or not input_data[key]:
                 errors.append(key)
+        if 'address' not in input_data or not input_data['address']:
+            if ('selfdelivery' in input_data and input_data['selfdelivery']):
+                input_data['address'] = input_data['selfdelivery']
+            else:
+                errors.append('address')
+
         if (len(errors)>0):
             data['errors'] = errors
             return render_to_response('checkout.html',{'data':data})

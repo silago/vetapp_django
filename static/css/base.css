@@ -56,3 +56,7 @@ section > .container {
     border-bottom:30px solid #fff;
     background-color:#fff;
 }
+
+.left-sidebar  a.active {
+    color: #fdb45e;
+}

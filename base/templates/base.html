@@ -152,38 +152,45 @@
 					<div class="left-sidebar">
 						<h2>Каталог</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-							<div class="panel panel-default">
-   
                           {% for i in data.menu %} 
+							<div class="panel panel-default">
                             {% if i.children|length > 0 %}
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+										<a 
+                                            data-toggle="collapse"
+                                            data-parent="#accordian"
+                                            href="#categoryId{{i.item.id}}"
+                                            >
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
 											{{ i.item.title }}
 										</a>
 									</h4>
 								</div>
-								<div id="sportswear" class="panel-collapse collapse">
+								<div id="categoryId{{i.item.id}}" class="panel-collapse collapse  
+                                    {% if i.item.slug == data.current_place %} in {% endif %}
+                                    ">
 									<div class="panel-body">
 										<ul>
-
                                           {% for sub in i.children %} 
-											<li><a href="/category/{{ sub.item.slug }}">{{ sub.item.title}} </a></li>
+                                          <li
+                                          
+                                              class="{% if sub.item.slug == data.current_place %} sub_in {% endif %}"
+                                              ><a
+                                              href="/category/{{ sub.item.slug }}">{{ sub.item.title}} </a></li>
                                           {% endfor %}
 										</ul>
 									</div>
 								</div>
-							</div>
                             {% endif %}
                             {% if i.children|length = 0  %}
-							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a href="/category/{{ i.item.slug }}/">{{ i.item.title}}</a></h4>
+									<h4 class="panel-title"><a
+                                            {% if i.item.slug == data.current_place %} class="active" {% endif %}
+                                            href="/category/{{ i.item.slug }}/">{{ i.item.title}}</a></h4>
 								</div>
-							</div>
                             {% endif %}
-
+							</div>
                             {% endfor %}
 						</div><!--/category-products-->
 					
@@ -278,7 +285,11 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <h2><strong>Режим работы:</strong></h2>
-                                    <p>Мы открыты ежедневно с 10:00 по 20:00</p>
+                                    <p>
+                                        пн-сб: 10:00 - 21:00
+                                        <br/>
+                                        вс: 10:00 - 20:00
+                                    </p>
                                 </div>
                             </div>
                             <!--
@@ -298,8 +309,10 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+					<p class="pull-left"> Copyright © 2016 E-SHOPPER Inc. Zoomagazinasb.ru.</p>
+                    <!--
+                        <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                    -->
 				</div>
 			</div>
 		</div>
@@ -317,7 +330,7 @@
     <script src="{% static 'js/basket.js' %}"></script>
     <script src="{% static 'js/ready.js' %}"></script>
     <script>
-        
+                
     </script>
 </body>
 </html>
