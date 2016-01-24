@@ -2,11 +2,17 @@ input.error {
     border:1px solid red;
 }
 
+#header .contactinfo .nav li a {
+    font-size:13px;
+}
+
 #header .contactinfo .nav h5 {
-    font-family: Helvetica;
-    font-size: 18px;
-    font-weight: normal;
-    letter-spacing: 1px;
+    color: #ffb13f;
+    font-family: Comic Sans MS;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px #242424;
 }
 
 #header .contactinfo .nav li.right {

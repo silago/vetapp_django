@@ -5,6 +5,7 @@
 {% load category_menu %}
 {% load thumbnail %}
 {% load flatpages %}
+{% load slider %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -47,8 +48,10 @@
                                     <a href='/basket/'>
                                       Товаров в корзине: <span id="basket_counter">0<span></a>
 							    </li>
-								<li class="right"><a href="callto:+74959680941"><i class="fa fa-phone"></i> +7 495 96 80 941</a></li>
+								<li class="right"><a href="callto:+74959680941"><i class="fa fa-phone"></i> +7 (495) 968 09 41</a></li>
+								<li class="right"><a href="callto:+74959641593"><i class="fa fa-phone"></i> +7 (495) 964 15 93</a></li>
 								<li class="right"><a href="mailto:Lev90@yandex.ru"><i class="fa fa-envelope"></i> Lev90@yandex.ru</a></li>
+                                <li class="right"><a href="https://maps.yandex.ru/213/moscow/?source=wizgeo&text=%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%205%2F7&l=map&sll=37.707105%2C55.795420&sspn=0.023603%2C0.005802&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fll%3D37.707%252C55.796%26spn%3D0.001%252C0.001%26text%3D%25D0%25A0%25D0%25BE%25D1%2581%25D1%2581%25D0%25B8%25D1%258F%252C%2520%25D0%259C%25D0%25BE%25D1%2581%25D0%25BA%25D0%25B2%25D0%25B0%252C%2520%25D0%259F%25D1%2580%25D0%25B5%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D1%2581%25D0%25BA%25D0%25B0%25D1%258F%2520%25D1%2583%25D0%25BB%25D0%25B8%25D1%2586%25D0%25B0%252C%25205%252F7">г. Москва, Преображенская улица 5/7</a></li>
 							</ul>
 						</div>
 					</div>
@@ -111,23 +114,18 @@
 				<div class="col-sm-12">
 					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
 						<ol class="carousel-indicators">
-							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-							<li data-target="#slider-carousel" data-slide-to="1"></li>
-							<li data-target="#slider-carousel" data-slide-to="2"></li>
+                            {% slider as slides %}
+                            {% for slide in slides %}
+                                <li data-target="#slider-carousel" {% if forloop.first %} class="active" {% endif %} data-slide-to="{{forloop.counter0}}"></li>
+                            {% endfor %}
 						</ol>
 						
 						<div class="carousel-inner">
-							<div style="padding:0px;" class="item active">
-                                <img src="{% static 'banners/1.jpg' %}" />
-                            </div>
-							<div style="padding:0px;" class="item">
-                                <img src="{% static 'banners/2.jpg' %}" />
-							</div>
-							
-							<div style="padding:0px;" class="item">
-                                <img src="{% static 'banners/3.jpg' %}" />
-							</div>
-							
+                            {% for slide in slides %}
+                                <div style="padding:0px;" class="item {% if forloop.first %}active{% endif %}" >
+                                    <img src="{{ slide.photo.url }}" />
+                                </div>
+                            {% endfor %}
 						</div>
 						
 						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
@@ -270,8 +268,8 @@
 						<div class="single-widget">
 							<h2>Контакты</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><p><a href="callto:+74959680941"><i class="fa fa-phone"></i> +7 495 96 80 941</a></p></li>
-								<li><p><a href="callto:+74959641593"><i class="fa fa-phone"></i> +7 495 96 41 593</a></p></li>
+								<li><p><a href="callto:+74959680941"><i class="fa fa-phone"></i> +7 (495) 968 09 41</a></p></li>
+								<li><p><a href="callto:+74959641593"><i class="fa fa-phone"></i> +7 (495) 964 15 93</a></p></li>
 								<li><p><a href="mailto:Lev90@yandex.ru"><i class="fa fa-envelope"></i>Lev90@yandex.ru</a><p></li>
 								<li><p>Адрес: <a href="https://maps.yandex.ru/213/moscow/?source=wizgeo&text=%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%205%2F7&l=map&sll=37.707105%2C55.795420&sspn=0.023603%2C0.005802&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fll%3D37.707%252C55.796%26spn%3D0.001%252C0.001%26text%3D%25D0%25A0%25D0%25BE%25D1%2581%25D1%2581%25D0%25B8%25D1%258F%252C%2520%25D0%259C%25D0%25BE%25D1%2581%25D0%25BA%25D0%25B2%25D0%25B0%252C%2520%25D0%259F%25D1%2580%25D0%25B5%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D1%2581%25D0%25BA%25D0%25B0%25D1%258F%2520%25D1%2583%25D0%25BB%25D0%25B8%25D1%2586%25D0%25B0%252C%25205%252F7">г. Москва, Преображенская улица 5/7</a></p></li>
 							</ul>
@@ -284,11 +282,15 @@
                                     <img src="/static/clock.png" style="max-width:100%;"/>
                                 </div>
                                 <div class="col-sm-7">
-                                    <h2><strong>Режим работы:</strong></h2>
                                     <p>
+                                    <h4><strong>Режим работы магазина:</strong></h4>
                                         пн-сб: 10:00 - 21:00
                                         <br/>
                                         вс: 10:00 - 20:00
+                                    </p>
+                                    <p>
+                                    <h4><strong>Прием заказов:</strong></h4>
+                                        Круглосуточно
                                     </p>
                                 </div>
                             </div>

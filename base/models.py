@@ -68,5 +68,7 @@ class Product(models.Model):
 
 class Slider(models.Model):
     photo = models.ImageField(null=True, blank=True)
+    def __str__(self):
+        return self.photo.url
 
 # Create your models here.
